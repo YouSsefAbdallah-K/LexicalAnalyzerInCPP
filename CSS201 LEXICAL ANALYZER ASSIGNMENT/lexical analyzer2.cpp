@@ -43,7 +43,8 @@ int lookup(char ch);
 int main() {
     in_fp.open("program.txt");
     if (!in_fp.is_open()) {
-        cerr << "ERROR - cannot open program.txt \n";
+        cout
+         << "ERROR - cannot open program.txt \n";
         return 1;
     }
 
@@ -71,9 +72,7 @@ int main() {
 
         lex();
     }
-    nextToken = EOF_TOKEN;
-    tokens.push_back({nextToken, "EOF"});
-
+   
     cout << "\nTokens and Lexemes:" << endl;
     for (const auto& tok : tokens) {
         cout << "Token: " << tok.first << ", Lexeme: " << tok.second << endl;
@@ -111,8 +110,7 @@ int lookup(char ch) {
             nextToken = SEMICOLON; 
             break;
         default:
-            nextToken = EOF_TOKEN;
-            lexeme = "";
+           
             break;
     }
     return nextToken;
@@ -165,9 +163,6 @@ int lex() {
         if (nextToken != EOF_TOKEN) {
             tokens.push_back({nextToken, lexeme});
         }
-    } else if (charClass == EOF) {
-        nextToken = EOF_TOKEN;
-        tokens.push_back({nextToken, "EOF"});
-    }
+    } 
     return nextToken;
 }
